@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <!-- Configuration for the default package. -->
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="to-index" class="com.hydadmin.actions.CandidateAction" method="toRegisterCandidate">
+            <result name="success">add-candidate.jsp</result>
+        </action>
+        <action name="add-candidate" class="com.hydadmin.actions.CandidateAction" method="registerCandidate">
+            <result name="success">success.jsp</result>
+            <result name="failure">add-candidate.jsp</result>
+        </action>
+    </package>
+  
+</struts>
