@@ -418,11 +418,14 @@ public class CandidateAction {
             String content = "You Are Registered Successfully!. Your Applicant ID is " + candidate.getApplicantid();
             MailSender.sendMail1(candidate.getEmailid(), subj, content, "");
             getAllUnPaidCandidates();
+            
             returnvalue = "success";
             addstatus = true;
         } else {
+            toRegisterCandidate();
             returnvalue = "failure";
             addstatus = false;
+            
         }
         return returnvalue;
     }
@@ -494,7 +497,7 @@ public class CandidateAction {
         candidateobj.setReceiptissuedate(receiptissuedate);
         candidateobj.setReceiptexpirydate(receiptexpirydate);
         mdao.updateCandidate(candidateobj);
-//        getAllUnPaidCandidates();
+        
         updatestatus=true;
         return SUCCESS;
     }

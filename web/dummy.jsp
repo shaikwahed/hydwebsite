@@ -1,13 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Hyderabad Manpower</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Boostrap Validator</title>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
@@ -50,7 +49,7 @@
                                     min: 2,
                                 },
                                 notEmpty: {
-                                    message: 'Please enter your first name'
+                                    message: 'Please supply your first name'
                                 }
                             }
                         },
@@ -60,7 +59,7 @@
                                     min: 2,
                                 },
                                 notEmpty: {
-                                    message: 'Please enter your last name'
+                                    message: 'Please supply your last name'
                                 }
                             }
                         },
@@ -68,39 +67,34 @@
                             validators: {
                                 stringLength: {
                                     min: 10,
-                                    max: 10,
-                                },
-                                notEmpty: {
-                                    message: 'Please enter your phone number'
-                                },
-                                mobileno: {
-                                    country: 'IND',
-                                    message: 'Please enter a vaild phone number with Country code'
+                                    max: 13,
+                                    notEmpty: {
+                                        message: 'Please supply your phone number'
+                                    },
+                                    mobileno: {
+                                        country: 'IND',
+                                        message: 'Please supply a vaild phone number with area code'
+                                    }
                                 }
                             }
-
                         },
                         emailid: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Please enter your email address'
+                                    message: 'Please supply your email address'
                                 },
                                 emailAddress: {
-                                    message: 'Please enter a valid email address'
-                                }
-                            }
-                        },
-                        passportno: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Please enter your Passport No'
+                                    message: 'Please supply a valid email address'
                                 }
                             }
                         },
                         religion: {
                             validators: {
+                                stringLength: {
+                                    min: 2,
+                                },
                                 notEmpty: {
-                                    message: 'Please enter your religion '
+                                    message: 'Please supply your street address'
                                 }
                             }
                         },
@@ -110,7 +104,7 @@
                                     min: 0,
                                 },
                                 notEmpty: {
-                                    message: 'Please enter your total exp'
+                                    message: 'Please supply your street address'
                                 }
                             }
                         },
@@ -120,7 +114,7 @@
                                     min: 0,
                                 },
                                 notEmpty: {
-                                    message: 'Please supply your gulf exp'
+                                    message: 'Please supply your street address'
                                 }
                             }
                         },
@@ -130,7 +124,7 @@
                                     min: 0,
                                 },
                                 notEmpty: {
-                                    message: 'Please supply your indian exp'
+                                    message: 'Please supply your street address'
                                 }
                             }
                         },
@@ -146,8 +140,11 @@
                         },
                         city: {
                             validators: {
+                                stringLength: {
+                                    min: 4,
+                                },
                                 notEmpty: {
-                                    message: 'Please select your city'
+                                    message: 'Please supply your city'
                                 }
                             }
                         },
@@ -158,10 +155,26 @@
                                 }
                             }
                         },
-                        country: {
+                        zip: {
                             validators: {
                                 notEmpty: {
-                                    message: 'Please select your country'
+                                    message: 'Please supply your zip code'
+                                },
+                                zipCode: {
+                                    country: 'US',
+                                    message: 'Please supply a vaild zip code'
+                                }
+                            }
+                        },
+                        comment: {
+                            validators: {
+                                stringLength: {
+                                    min: 10,
+                                    max: 200,
+                                    message: 'Please enter at least 10 characters and no more than 200'
+                                },
+                                notEmpty: {
+                                    message: 'Please supply a description about yourself'
                                 }
                             }
                         },
@@ -209,8 +222,7 @@
 
     </head>
 
-    <body style="background: #eee;">
-        <jsp:include page="include/header.jsp"/>
+    <body>
         <form class="form-horizontal" action="${pagContext.request.contextPath}/hydwebsite/add-candidate" method="post"  id="reg_form">
             <s:if test="addstatus==false">
                 <div class="col-md-6 alert alert-warning fade in w3-animate-right" style="">
@@ -253,7 +265,7 @@
                     <label class="col-md-4 control-label">Mobile No: </label>
                     <div class="col-md-4  inputGroupContainer">
                         <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                            <input name="mobileno" placeholder="Ex:9876543210" class="form-control" type="text">
+                            <input name="mobileno" placeholder="Ex :9876543210" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -283,7 +295,7 @@
                     <label class="control-label col-md-4" for="pwd">Date of Birth</label>
                     <div class="col-md-4">          
                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                            <input required="true" class="form-control" type="text" name="dateofbirth" readonly />
+                            <input class="form-control" type="text" name="dateofbirth" readonly />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                     </div>
@@ -291,7 +303,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">Passport No</label>
                     <div class="col-md-4  inputGroupContainer">
-                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                             <input name="passportno" placeholder="Passport No" class="form-control" type="text">
                         </div>
                     </div>
@@ -299,7 +311,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">Religion</label>
                     <div class="col-md-4  inputGroupContainer">
-                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                             <input name="religion" placeholder="Religion" class="form-control" type="text">
                         </div>
                     </div>
@@ -334,7 +346,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">Total Experience</label>
                     <div class="col-md-4  inputGroupContainer">
-                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                             <input name="totalexp" placeholder="Total Experience" class="form-control" type="text">
                         </div>
                     </div>
@@ -342,7 +354,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">Gulf Experience</label>
                     <div class="col-md-4  inputGroupContainer">
-                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                             <input name="gulfexp" placeholder="Gulf Experience" class="form-control" type="text">
                         </div>
                     </div>
@@ -350,7 +362,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">Indian Experience</label>
                     <div class="col-md-4  inputGroupContainer">
-                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                             <input name="indianexp" placeholder="Indian Experience" class="form-control" type="text">
                         </div>
                     </div>
@@ -368,7 +380,7 @@
                     <label class="control-label col-md-4" for="pwd">Country</label>
                     <div class="col-md-4 selectContainer">
                         <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                            <select  name="country" class="form-control input-sm countries" id="countryId">
+                            <select name="country" class="form-control input-sm countries" id="countryId">
                                 <option value="">Select Country:</option>
                             </select>
                         </div>
@@ -399,12 +411,11 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                        <a class="btn btn-primary" href="index.jsp"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
-                        <button type="submit" class="btn btn-primary" >Submit <span class="glyphicon glyphicon-send"></span></button>
+                         <a class="btn btn-info" href="http://hyderabadmanpower.com/">Back</a>
+                        <button type="submit" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
                     </div>
                 </div>
             </fieldset>
-        </form><br><br><br>
-        <jsp:include page="include/footer.jsp"/>
+        </form>
     </body>
 </html>
